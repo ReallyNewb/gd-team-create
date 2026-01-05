@@ -18,9 +18,9 @@ namespace argonutils {
 			geode::Mod::get()->setSavedValue<std::string>("argon-token", "");
 			return "Please <cg>refresh login</c> in <cr>account settings.</c>";
 		}
+		default: 
+			return "Unknown error. Error:";
 		}
-
-		return "Unknown error. Error:";
 	}
 
 	void startAuth(const std::function<void(const std::string&, bool)>& callback) {
