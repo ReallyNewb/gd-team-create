@@ -8,7 +8,7 @@
 namespace argonutils {
 	geode::EventListener<geode::utils::web::WebTask> seshListener;
 
-	std::string getPreErrorString(unsigned int errorCode) {
+	std::string getPreErrorString(unsigned int errorCode, matjson::Value& const err) {
 		switch (errorCode) {
 		case 2:
 			return "An error occurred with verification due to some error on Argon's end. Error:";
@@ -18,8 +18,10 @@ namespace argonutils {
 			geode::Mod::get()->setSavedValue<std::string>("argon-token", "");
 			return "Please <cg>refresh login</c> in <cr>account settings.</c>";
 		}
-		case 5:
+		case 5: {
+			geode::utils::clipboard::write(err.asString().unwrapOr(""));
 			return "An <cg>Exception</c> was <cy>thrown.</c> Please report this <cr>error</c> to <cp>the mod's comments:</c>";
+		}
 		default: 
 			return "Unknown error. Error:";
 		}
