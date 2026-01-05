@@ -20,7 +20,8 @@ bool TCUserColor::setup() {
 	m_colorPicker->setPosition({size.width / 3.f, size.height / 2.f});
 	m_colorPicker->setDelegate(this);
 
-	m_userNode = TCUserNode::create(gam->m_username, mod->getSavedValue<cocos2d::ccColor3B>("user-color", {255, 255, 255}));
+	auto userColor = mod->getSavedValue<cocos2d::ccColor3B>("user-color", {255, 255, 255});
+	m_userNode = TCUserNode::create(gam->m_username, color);
 	m_userNode->setPosition({size.width / 1.35f, size.height / 1.75f});
 
 	m_r = geode::TextInput::create(50.f, "Red", "bigFont.fnt");
@@ -67,7 +68,7 @@ bool TCUserColor::setup() {
 	pcButtons->setAnchorPoint({0.f, 0.5f});
 
 	m_submit = CCMenuItemSpriteExtra::create(ButtonSprite::create("Submit"), this, menu_selector(TCUserColor::onSubmit));
-	m_loading = geode::LoadingSpinner::create(35.f);
+	m_loading = geode::LoadingSpinner::create(30.f);
 	m_loading->setVisible(false);
 
 	auto sMenu = cocos2d::CCMenu::createWithItem(m_submit);
@@ -87,6 +88,8 @@ bool TCUserColor::setup() {
 	m_mainLayer->addChild(sMenu);
 	m_mainLayer->addChild(m_loading);
 
+	this->colorValueChanged(userColor);
+
 	return true;
 }
 
@@ -94,7 +97,7 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 	m_loading->setVisible(true);
 	m_submit->setVisible(false);
 	argonutils::showAuthConsentPopup([=, this](const std::string& token, bool success) {
-		auto rgb = m_colorPicker->m_rgb;
+		auto rgb = m_colorPicker->getColorValue();
 
 		if (success) {
 			auto web = geode::utils::web::WebRequest();

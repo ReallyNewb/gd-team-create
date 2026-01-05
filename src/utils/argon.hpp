@@ -18,6 +18,8 @@ namespace argonutils {
 			geode::Mod::get()->setSavedValue<std::string>("argon-token", "");
 			return "Please <cg>refresh login</c> in <cr>account settings.</c>";
 		}
+		case 5:
+			return "An <cg>Exception</c> was <cy>thrown.</c> Please report this <cr>error</c> to <cp>the mod's comments:</c>";
 		default: 
 			return "Unknown error. Error:";
 		}

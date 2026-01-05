@@ -13,6 +13,7 @@
 	"description": "Level collaboration in-game!",
 	"tags": ["editor", "online", "enhancement"],
 	"dependencies": {
-		"geode.node-ids": {"version": ">=v1.21.1", "importance": "required"}
+		"geode.node-ids": {"version": ">=v1.21.1", "importance": "required"},
+		"user95401.geode-mod-comments": ">=v2.0.0-beta.5"
 	}
 }
