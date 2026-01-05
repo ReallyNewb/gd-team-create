@@ -151,7 +151,7 @@ void TCUserColor::onPlayerColor(cocos2d::CCObject* sender) {
 }
 
 void TCUserColor::onInfo(cocos2d::CCObject*) {
-	FLAlertLayer::create("User Color Help", "Changes the <cr>color</c> of your <cl>user circle</c> for every <cf>Team Create session.</c>\n\nYou can modify your <co>color</c> by using the <cp>color picker,</c> the <cb>color inputs,</c> or the <cy>player color buttons</c> at the top.", "OK")->show();
+	FLAlertLayer::create("User Color Help", "Changes the <cr>color</c> of your <cl>user circle</c> for every <cf>Team Create session.</c>\n\nYou can modify your <cr>color</c> by using the <cp>color picker,</c> the <cy>color inputs,</c> or the <cj>player color buttons</c> at the top.", "OK")->show();
 }
 
 void TCUserColor::colorValueChanged(cocos2d::ccColor3B color) {
