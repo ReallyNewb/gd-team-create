@@ -6,6 +6,8 @@
 #include <argon/argon.hpp>
 
 namespace argonutils {
+	geode::EventListener<geode::utils::web::WebTask> seshListener;
+
 	std::string getPreErrorString(unsigned int errorCode) {
 		switch (errorCode) {
 		case 2:
@@ -33,7 +35,31 @@ namespace argonutils {
 			if (res.isOk()) {
 				auto token = std::move(res).unwrap();
 				geode::Mod::get()->setSavedValue<std::string>("argon-token", token);
-				callback(token, true);
+
+				auto gam = GJAccountManager::get();
+				auto web = geode::utils::web::WebRequest();
+				web.bodyString(
+					fmt::format(
+						"userName={}&userID={}&accountID={}&argon={}",
+						gam->m_username, GameManager::get()->m_playerUserID, gam->m_accountID, token
+					)
+				);
+
+				argonutils::seshListener.bind([callback](geode::utils::web::WebTask::Event* e) {
+					if (auto* res = e->getValue()) {
+						if (res->ok()) {
+							auto session = res->json()[0].asString().unwrap();
+							geode::Mod::get()->setSavedValue<std::string>("argon-token", session);
+							callback(session, true);
+							return;
+						}
+
+						callback("", false);
+					}
+					else if (e->getProgress()) return;
+					else if (e->isCancelled()) return;
+				});
+				argonutils::seshListener.setFilter(web.post("http://127.0.0.1:5000/argon"));
 			} else {
 				FLAlertLayer::create("Authentication Failed", fmt::format("Argon authentication <cr>failed.</c> The following error has already been copied to your clipboard:\n<cy>{}</c>", res.unwrapErr()).c_str(), "OK")->show();
 				geode::utils::clipboard::write(res.unwrapErr());

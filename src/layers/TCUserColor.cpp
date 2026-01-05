@@ -96,14 +96,13 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 	argonutils::showAuthConsentPopup([=, this](const std::string& token, bool success) {
 		auto rgb = m_colorPicker->m_rgb;
 
-		/*if (success) {
+		if (success) {
 			auto web = geode::utils::web::WebRequest();
 			web.bodyString(
 				fmt::format(
-					"userName={}&userID={}&accountID={}&argon={}&r={}&g={}&b={}",
+					"userName={}&userID={}&accountID={}&auth={}&r={}&g={}&b={}",
 					gam->m_username, gm->m_playerUserID, gam->m_accountID,
-					mod->getSavedValue<std::string>("argon-token"),
-					rgb.r, rgb.g, rgb.b
+					token, rgb.r, rgb.g, rgb.b
 				)
 			);
 
@@ -112,7 +111,7 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 					if (res->ok()) {
 						FLAlertLayer::create("Set User Color", "Set user color successfully.", "OK")->show();
 					} 
-					else if (res->code() < 500) {
+					else {
 						auto json = res->json();
 						FLAlertLayer::create("Failed To Set User Color", fmt::format("{} <cy>{}</c>", argonutils::getPreErrorString(json[1].asUInt().unwrap()), json[0].asString().unwrap()).c_str(), "OK")->show();
 					}
@@ -121,7 +120,7 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 				else if (e->isCancelled()) return;
 			});
 			m_colorListener.setFilter(web.post("http://127.0.0.1:5000/set-color"));
-		}*/
+		}
 
 		mod->setSavedValue<cocos2d::ccColor3B>("user-color", rgb);
 		m_loading->setVisible(false);
