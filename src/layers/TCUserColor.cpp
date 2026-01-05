@@ -183,7 +183,7 @@ TCUserColor* TCUserColor::create() {
 
 	auto ret = new TCUserColor();
 
-	if (ret->initAnchored(size.width - 200.f, size.height - 50.f)) {
+	if (ret->initAnchored(369.f, size.height - 50.f)) {
 		ret->autorelease();
 		return ret;
 	}

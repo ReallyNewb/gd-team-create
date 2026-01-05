@@ -38,7 +38,6 @@ namespace argonutils {
 			auto res = co_await task;
 			if (res.isOk()) {
 				auto token = std::move(res).unwrap();
-				geode::Mod::get()->setSavedValue<std::string>("argon-token", token);
 
 				auto gam = GJAccountManager::get();
 				auto web = geode::utils::web::WebRequest();
@@ -54,6 +53,9 @@ namespace argonutils {
 						if (res->ok()) {
 							auto session = res->json().unwrap()[0].asString().unwrap();
 							geode::Mod::get()->setSavedValue<std::string>("argon-token", session);
+
+							geode::log::info(session);
+							
 							callback(session, true);
 							return;
 						}
