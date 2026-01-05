@@ -125,7 +125,7 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 				else if (e->getProgress()) return;
 				else if (e->isCancelled()) return;
 			});
-			m_colorListener.setFilter(web.post("http://0.0.0.0:80/set-color"));
+			m_colorListener.setFilter(web.post("http://192.168.1.46:80/set-color"));
 		} else {
 			m_loading->setVisible(false);
 			m_submit->setVisible(true);

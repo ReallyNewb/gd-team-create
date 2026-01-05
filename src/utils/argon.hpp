@@ -63,7 +63,7 @@ namespace argonutils {
 					else if (e->getProgress()) return;
 					else if (e->isCancelled()) return;
 				});
-				argonutils::seshListener.setFilter(web.post("http://0.0.0.0:80/argon"));
+				argonutils::seshListener.setFilter(web.post("http://192.168.1.46:80/argon"));
 			} else {
 				FLAlertLayer::create("Authentication Failed", fmt::format("Argon authentication <cr>failed.</c> The following error has already been copied to your clipboard:\n<cy>{}</c>", res.unwrapErr()).c_str(), "OK")->show();
 				geode::utils::clipboard::write(res.unwrapErr());
