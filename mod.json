@@ -1,0 +1,18 @@
+{
+	"geode": "4.10.0",
+	"gd": {
+		"win": "2.2074",
+		"android": "2.2074",
+		"mac": "2.2074",
+		"ios": "2.2074"
+	},
+	"id": "reallynewb.team-create",
+	"name": "Team Create",
+	"version": "v1.0.0-alpha",
+	"developer": "ReallyNewb",
+	"description": "Level collaboration in-game!",
+	"tags": ["editor", "online", "enhancement"],
+	"dependencies": {
+		"geode.node-ids": {"version": ">=v1.21.1", "importance": "required"}
+	}
+}

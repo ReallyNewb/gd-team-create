@@ -1,0 +1,81 @@
+#ifndef NEWB_ARGON_HPP
+#define NEWB_ARGON_HPP
+
+#include <Geode/Geode.hpp>
+#include <Geode/utils/coro.hpp>
+#include <argon/argon.hpp>
+
+namespace argonutils {
+	std::string getPreErrorString(unsigned int errorCode) {
+		switch (errorCode) {
+		case 2:
+			return "An error occurred with verification due to some error on Argon's end. Error:";
+		case 3:
+			return "Please stop trying to send requests with <cl>bogus data.</c>";
+		case 4: {
+			geode::Mod::get()->setSavedValue<std::string>("argon-token", "");
+			return "Please <cg>refresh login</c> in <cr>account settings.</c> Your <cl>Argon token</c> has already been <cb>reset.</c>";
+		}
+		}
+	}
+
+	void startAuth(const std::function<void(const std::string&, bool)>& callback) {
+		auto eToken = geode::Mod::get()->getSavedValue<std::string>("argon-token");
+		if (!eToken.empty()) {
+			callback(eToken, true);
+			return;
+		}
+
+		$async(task = argon::startAuth(), callback) {
+			auto res = co_await task;
+			if (res.isOk()) {
+				auto token = std::move(res).unwrap();
+				geode::Mod::get()->setSavedValue<std::string>("argon-token", token);
+				callback(token, true);
+			} else {
+				FLAlertLayer::create("Authentication Failed", fmt::format("Argon authentication <cr>failed.</c> The following error has already been copied to your clipboard:\n<cy>{}</c>", res.unwrapErr()).c_str(), "OK")->show();
+				geode::utils::clipboard::write(res.unwrapErr());
+				callback("", false);
+			}
+		};
+	}
+
+	void showAuthConsentPopup(const std::function<void(const std::string&, bool)>& callback) {
+		auto eToken = geode::Mod::get()->getSavedValue<std::string>("argon-token");
+		if (!eToken.empty()) {
+			callback(eToken, true);
+			return;
+		}
+
+		geode::MDPopup::create(
+			"Authenticate With Argon",
+
+			"# Argon\n"
+			"Argon is an <cl>authentication method</c> created by the developers of <ca>Globed</c> and is trusted by the developer, <cy>RobTop.</c>\n\n"
+
+			"Argon sends a <cg>message</c> to a bot account for verification. Argon <cr>**does and will NOT**</c>"
+			" send your <cy>GD password</c> to a server for verification.\n\n"
+
+			"You may read the privacy policy for specifics as to how your data is utilized.\n\n"
+
+			"# Privacy Policy\n"
+
+			"The data we collect are your <cl>username, accountID, userID, Argon token, icon colors, primary icon type and index, and user color.</c>\n"
+			"The first 4 pieces of data are <cp>merely for Argon verification.</c> The rest are <ca>merely cosmetic</c> and <cr>won't share anything personal about your account.</c>\n\n"
+
+			"To make support for the <cr>Friends Only</c> invite mode, we send your <cl>friends list</c> to the server.</c>\n\n"
+
+			"The data we collect <cr>is NOT</c> shared with any <cb>third party services.</c> <cj>Level data</c> from our server are at times used for training a <cl>Zstd dictionary.</c> "
+			"Note that <cl>Zstd dictionaries</c> are <co>entirely local</c> and don't rely on any external services.\n\n"
+
+			"<cl>Zstd dictionaries</c> are merely for <cp>compressing</c> level data in <cy>**HUGE amounts**</c> "
+			"to comply with <cf>disk space limits</c> from the host of the mod's server, [Spaceify.](https://spaceify.eu)\n\n"
+			"By training <cl>Zstd dictionaries,</c> compressing can be made <cj>**MUCH faster.**</c>",
+
+			"OK", "Authenticate",
+			[callback](bool confirm) { if (confirm) startAuth(callback); }
+		)->show();
+	}
+}
+
+#endif
