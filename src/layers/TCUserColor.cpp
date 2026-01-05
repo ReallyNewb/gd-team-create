@@ -88,7 +88,7 @@ bool TCUserColor::setup() {
 	m_mainLayer->addChild(sMenu);
 	m_mainLayer->addChild(m_loading);
 
-	this->colorValueChanged(userColor);
+	m_colorPicker->setColorValue(userColor);
 
 	return true;
 }
@@ -125,7 +125,7 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 				else if (e->getProgress()) return;
 				else if (e->isCancelled()) return;
 			});
-			m_colorListener.setFilter(web.post("http://127.0.0.1:5000/set-color"));
+			m_colorListener.setFilter(web.post("http://0.0.0.0:80/set-color"));
 		} else {
 			m_loading->setVisible(false);
 			m_submit->setVisible(true);
