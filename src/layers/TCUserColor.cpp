@@ -21,7 +21,7 @@ bool TCUserColor::setup() {
 	m_colorPicker->setDelegate(this);
 
 	auto userColor = mod->getSavedValue<cocos2d::ccColor3B>("user-color", {255, 255, 255});
-	m_userNode = TCUserNode::create(gam->m_username, color);
+	m_userNode = TCUserNode::create(gam->m_username, userColor);
 	m_userNode->setPosition({size.width / 1.35f, size.height / 1.75f});
 
 	m_r = geode::TextInput::create(50.f, "Red", "bigFont.fnt");
