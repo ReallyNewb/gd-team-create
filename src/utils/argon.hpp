@@ -54,8 +54,8 @@ namespace argonutils {
 							auto session = res->json().unwrap()[0].asString().unwrap();
 							geode::Mod::get()->setSavedValue<std::string>("argon-token", session);
 
-							geode::log::info(session);
-							
+							geode::log::info("{}", session);
+
 							callback(session, true);
 							return;
 						}
