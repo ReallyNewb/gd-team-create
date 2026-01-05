@@ -115,16 +115,20 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 						auto json = res->json().unwrapOr(matjson::Value::array());
 						FLAlertLayer::create("Failed To Set", fmt::format("{} <cy>{}</c>", argonutils::getPreErrorString(json[1].asUInt().unwrapOr(0)), json[0].asString().unwrapOr("Servers may be down. Please wait until they are back up.")).c_str(), "OK")->show();
 					}
+					
+					m_loading->setVisible(false);
+					m_submit->setVisible(true);
 				} 
 				else if (e->getProgress()) return;
 				else if (e->isCancelled()) return;
 			});
 			m_colorListener.setFilter(web.post("http://127.0.0.1:5000/set-color"));
+		} else {
+			m_loading->setVisible(false);
+			m_submit->setVisible(true);
 		}
 
 		mod->setSavedValue<cocos2d::ccColor3B>("user-color", rgb);
-		m_loading->setVisible(false);
-		m_submit->setVisible(true);
 	});
 }
 
