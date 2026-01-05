@@ -106,7 +106,7 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 				)
 			);
 
-			m_colorListener.bind([](geode::utils::web::WebTask::Event* e) {
+			m_colorListener.bind([this](geode::utils::web::WebTask::Event* e) {
 				if (auto* res = e->getValue()) {
 					if (res->ok()) {
 						FLAlertLayer::create("Set User Color", "Set user color successfully.", "OK")->show();
