@@ -94,8 +94,9 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 	m_loading->setVisible(true);
 	m_submit->setVisible(false);
 	argonutils::showAuthConsentPopup([=, this](const std::string& token, bool success) {
-		if (success) {
-			auto rgb = m_colorPicker->m_rgb;
+		auto rgb = m_colorPicker->m_rgb;
+
+		/*if (success) {
 			auto web = geode::utils::web::WebRequest();
 			web.bodyString(
 				fmt::format(
@@ -116,10 +117,11 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 						FLAlertLayer::create("Failed To Set User Color", fmt::format("{} <cy>{}</c>", argonutils::getPreErrorString(json[1].asUInt().unwrap()), json[0].asString().unwrap()).c_str(), "OK")->show();
 					}
 				} 
-				else if (e->getProgress() || e->isCancelled()) return;
+				else if (e->getProgress()) return;
+				else if (e->isCancelled()) return;
 			});
 			m_colorListener.setFilter(web.post("http://127.0.0.1:5000/set-color"));
-		}
+		}*/
 
 		mod->setSavedValue<cocos2d::ccColor3B>("user-color", rgb);
 		m_loading->setVisible(false);
