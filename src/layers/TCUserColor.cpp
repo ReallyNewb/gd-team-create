@@ -85,7 +85,7 @@ bool TCUserColor::setup() {
 	m_mainLayer->addChild(pcButtons);
 
 	m_mainLayer->addChild(sMenu);
-	m_mainLayer->addChild(loading);
+	m_mainLayer->addChild(m_loading);
 
 	return true;
 }
@@ -93,7 +93,7 @@ bool TCUserColor::setup() {
 void TCUserColor::onSubmit(cocos2d::CCObject*) {
 	m_loading->setVisible(true);
 	m_submit->setVisible(false);
-	argonutils::showAuthConsentPopup([=](const std::string& token, bool success) {
+	argonutils::showAuthConsentPopup([=, this](const std::string& token, bool success) {
 		if (success) {
 			auto rgb = m_colorPicker->m_rgb;
 			auto web = geode::utils::web::WebRequest();
@@ -113,7 +113,7 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 					} 
 					else if (res->code() < 500) {
 						auto json = res->json();
-						FLAlertLayer::create("Failed To Set User Color", fmt::format("{} <cy>{}</c>", argonutils::getPreErrorString(json[1]), json[0].asUInt().unwrap()).c_str(), "OK")->show();
+						FLAlertLayer::create("Failed To Set User Color", fmt::format("{} <cy>{}</c>", argonutils::getPreErrorString(json[1].asUInt().unwrap()), json[0].asString().unwrap()).c_str(), "OK")->show();
 					}
 				} 
 				else if (e->getProgress() || e->isCancelled()) return;
