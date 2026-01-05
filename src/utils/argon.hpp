@@ -8,7 +8,7 @@
 namespace argonutils {
 	geode::EventListener<geode::utils::web::WebTask> seshListener;
 
-	std::string getPreErrorString(unsigned int errorCode, matjson::Value& const err) {
+	std::string getPreErrorString(unsigned int errorCode, const matjson::Value& err) {
 		switch (errorCode) {
 		case 2:
 			return "An error occurred with verification due to some error on Argon's end. Error:";
