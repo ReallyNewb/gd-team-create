@@ -48,7 +48,7 @@ namespace argonutils {
 				argonutils::seshListener.bind([callback](geode::utils::web::WebTask::Event* e) {
 					if (auto* res = e->getValue()) {
 						if (res->ok()) {
-							auto session = res->json()[0].asString().unwrap();
+							auto session = res->json().unwrap()[0].asString().unwrap();
 							geode::Mod::get()->setSavedValue<std::string>("argon-token", session);
 							callback(session, true);
 							return;
