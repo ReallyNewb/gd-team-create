@@ -67,7 +67,7 @@ bool TCUserColor::setup() {
 	pcButtons->setAnchorPoint({0.f, 0.5f});
 
 	m_submit = CCMenuItemSpriteExtra::create(ButtonSprite::create("Submit"), this, menu_selector(TCUserColor::onSubmit));
-	m_loading = geode::LoadingSpinner::create(0.5f);
+	m_loading = geode::LoadingSpinner::create(35.f);
 	m_loading->setVisible(false);
 
 	auto sMenu = cocos2d::CCMenu::createWithItem(m_submit);
