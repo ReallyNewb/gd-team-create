@@ -56,7 +56,8 @@ bool TCUserColor::setup() {
 	auto c3B = CCMenuItemSpriteExtra::create(ButtonSprite::create("Glow Color"), this, menu_selector(TCUserColor::onPlayerColor));
 	c3B->setTag(2);
 	c3B->setEnabled(gm->m_playerGlow);
-	static_cast<cocos2d::CCSprite*>(c3B->m_pNormalImage)->setColor(gm->m_playerGlow ? (cocos2d::ccColor3B) {255, 255, 255} : (cocos2d::ccColor3B) {127, 127, 127});
+	static_cast<cocos2d::CCSprite*>(c3B->m_pNormalImage)->setCascadeColorEnabled(true);
+	c3B->setColor(gm->m_playerGlow ? (cocos2d::ccColor3B) {255, 255, 255} : (cocos2d::ccColor3B) {127, 127, 127});
 
 	pcButtons->addChild(c1B);
 	pcButtons->addChild(c2B);
@@ -116,7 +117,7 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 					} 
 					else {
 						auto json = res->json().unwrapOr(matjson::Value::array());
-						FLAlertLayer::create("Failed To Set", fmt::format("{} <cy>{}</c>", argonutils::getPreErrorString(json[1].asUInt().unwrapOr(0), json[0]), json[0].asString().unwrapOr("Servers may be down. Please wait until they are back up.")).c_str(), "OK")->show();
+						FLAlertLayer::create("Failed To Set Color", fmt::format("{} <cy>{}</c>", argonutils::getPreErrorString(json[1].asUInt().unwrapOr(0), json[0]), json[0].asString().unwrapOr("Servers may be down. Please wait until they are back up.")).c_str(), "OK")->show();
 					}
 					
 					m_loading->setVisible(false);
