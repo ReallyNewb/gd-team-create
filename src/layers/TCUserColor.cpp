@@ -116,7 +116,7 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 					} 
 					else {
 						auto json = res->json().unwrapOr(matjson::Value::array());
-						FLAlertLayer::create("Failed To Set", fmt::format("{} <cy>{}</c>", argonutils::getPreErrorString(json[1].asUInt().unwrapOr(0)), json[0].asString().unwrapOr("Servers may be down. Please wait until they are back up.")).c_str(), "OK")->show();
+						FLAlertLayer::create("Failed To Set", fmt::format("{} <cy>{}</c>", argonutils::getPreErrorString(json[1].asUInt().unwrapOr(0), json[0]), json[0].asString().unwrapOr("Servers may be down. Please wait until they are back up.")).c_str(), "OK")->show();
 					}
 					
 					m_loading->setVisible(false);
