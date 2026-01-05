@@ -113,7 +113,7 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 					} 
 					else {
 						auto json = res->json().unwrap();
-						FLAlertLayer::create("Failed To Set User Color", fmt::format("{} <cy>{}</c>", argonutils::getPreErrorString(json[1].asUInt().unwrap()), json[0].asString().unwrap()).c_str(), "OK")->show();
+						FLAlertLayer::create("Failed To Set", fmt::format("{} <cy>{}</c>", argonutils::getPreErrorString(json[1].asUInt().unwrap()), json[0].asString().unwrap()).c_str(), "OK")->show();
 					}
 				} 
 				else if (e->getProgress()) return;
