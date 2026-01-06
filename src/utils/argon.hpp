@@ -120,23 +120,23 @@ namespace argonutils {
 
 			"### Data We (Never Will) Share\n"
 
-			"The data we collect <cr>is NOT</c> shared with any <cb>third party services.</c> The data is only kept in <cl>Team Create's database</c> and is <cr>**not distributed**</c> to <cb>other databases or random people.</c>"
+			"The data we collect <cr>is NOT</c> shared with any <cb>third party services.</c> The data is only kept in <cl>Team Create's database</c> and is <cr>**not distributed**</c> to <cb>other databases or random people.</c>\n"
 
 			"## Data Security\n"
 
 			"We try to <cy>protect your data</c> by using some basic <cr>security methods</c> like <cl>verifying the data sent by the client</c> and <cj>parameterized queries</c> in <cb>SQL commands.</c>\n"
 			"However, there may be <cr>security bugs</c> unnoticed, or <cp>I implemented a security method **really poorly.**</c>\n"
-			"### <cy>If you ever find a security bug, PLEASE and DO send it to me (ReallyNewb) privately via the Geometry Dash messaging system.</c></c>"
+			"### <cy>If you ever find a security bug, PLEASE and DO send it to me (ReallyNewb) privately via the Geometry Dash messaging system.</c>\n"
 
 			"## User Rights\n"
 
 			"<cg>Users</c> may <cr>manage their data</c> at anytime using the [mod's settings.](mod:reallynewb.team-create) If you have <co>any suggestion</c> for <cl>data management,</c>"
-			"definitely <cy>post it</c> in the <cl>mod's comments.</c>"
+			"definitely <cy>post it</c> in the <cl>mod's comments.</c>\n"
 
 			"## Data Retention\n"
 
 			"<cg>A user's data</c> is <cr>retained</c> as long as they <co>delete their account</c> via the [mod's settings.](mod:reallynewb.team-create) <cf>Deleting your account</c> will take up to <cy>14 days</c>"
-			" <cb>just in case</c> you <cl>might've tapped too many buttons.</c>\n\nAs always, <cr>account deletion</c> is <ca>**ALWAYS revertable.**</c>"
+			" <cb>just in case</c> you <cl>might've tapped too many buttons.</c>\n\nAs always, <cr>account deletion</c> is <ca>**ALWAYS revertable.**</c>\n"
 
 			"## You may now <cf>go ahead</c> and <cj>start the authentication process.</c> If you <cr>don't feel like doing so right now,</c> <cy>consider authenticating later by pressing \"OK\".</c>",
 
