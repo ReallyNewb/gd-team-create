@@ -95,9 +95,9 @@ bool TCUserColor::setup() {
 }
 
 void TCUserColor::onSubmit(cocos2d::CCObject*) {
-	m_loading->setVisible(true);
-	m_submit->setVisible(false);
 	argonutils::showAuthConsentPopup([=, this](const std::string& token, bool success) {
+		m_loading->setVisible(true);
+		m_submit->setVisible(false);
 		auto rgb = m_colorPicker->getColorValue();
 
 		if (success) {
