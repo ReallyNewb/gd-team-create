@@ -111,7 +111,7 @@ namespace argonutils {
 			"By training <cl>Zstd dictionaries,</c> compressing can be made <cj>**MUCH faster.**</c>",
 
 			"OK", "Authenticate",
-			[callback](bool confirm) { 
+			[callback, show, hide](bool confirm) { 
 				if (confirm) {
 					show->setVisible(true);
 					hide->setVisible(false);
