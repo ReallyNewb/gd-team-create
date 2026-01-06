@@ -81,6 +81,8 @@ namespace argonutils {
 	void showAuthConsentPopup(const std::function<void(const std::string&, bool)>& callback, cocos2d::CCNode* show, cocos2d::CCNode* hide) {
 		auto eToken = geode::Mod::get()->getSavedValue<std::string>("argon-token");
 		if (!eToken.empty()) {
+			show->setVisible(true);
+			hide->setVisible(false);
 			callback(eToken, true);
 			return;
 		}
