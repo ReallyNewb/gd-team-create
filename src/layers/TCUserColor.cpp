@@ -118,7 +118,7 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 								argonutils::getPreErrorString(json[1].asUInt().unwrapOr(0), json[0]), 
 								json[0].asString().unwrapOr(res->string().unwrapOr(""))
 							), 
-							"OK", nullptr, nullptr
+							"OK", nullptr, static_cast<std::function<void(bool)>>(nullptr)
 						)->show();
 					}
 					
