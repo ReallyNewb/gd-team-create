@@ -22,4 +22,5 @@ You and the collaborators can **<cf>place</c> <cl>blocks,</c> <cb>triggers,</c> 
 
 Based on the <cb>permissions</c> <cl>you gave them,</c> they're <cr>limited</c> as to <cf>what they can do.</c> For example, you <ca>cannot save changes to a level</c> if you are a <cp>"Minimal Collaborator".</c>
 
+
 <cf>As well as all that good stuff,</c> there's a <cy>chat system</c> you can use to <cp>communicate</c> with <co>creators!</c> <cb>Optionally,</c> there's <cf>Discord</c> or <cj>other communication platforms,</c> but this <cr>serves as a half-decent alternative to them.</c>
