@@ -126,7 +126,7 @@ namespace argonutils {
 
 			"We try to <cy>protect your data</c> by using some basic <cr>security methods</c> like <cl>verifying the data sent by the client</c> and <cj>parameterized queries</c> in <cb>SQL commands.</c>\n"
 			"However, there may be <cr>security bugs</c> unnoticed, or <cp>I implemented a security method **really poorly.**</c>\n"
-			"### <cy>If you ever find a security bug, PLEASE and DO send it to me (ReallyNewb) privately via the Geometry Dash messaging system.</c></c>",
+			"### <cy>If you ever find a security bug, PLEASE and DO send it to me (ReallyNewb) privately via the Geometry Dash messaging system.</c></c>"
 
 			"## User Rights\n"
 
