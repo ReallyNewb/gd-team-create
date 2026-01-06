@@ -27,7 +27,7 @@ namespace argonutils {
 		}
 	}
 
-	std::string basePostString() {
+	std::string basePostString(const std::string& token) {
 		auto gam = GJAccountManager::get();
 		auto gm = GameManager::get();
 
@@ -35,7 +35,7 @@ namespace argonutils {
 			"userName={}&userID={}&accountID={}&argon={}&pcolor={}&scolor={}&gcolor={}&genabled={}&icon={}&iconType={}",
 			gam->m_username, gm->m_playerUserID, gam->m_accountID, token,
 			gm->m_playerColor, gm->m_playerColor2, gm->m_playerGlowColor,
-			(int) gm->m_playerGlow, gm->activeIconForType(player->m_playerIconType), (int) player->m_playerIconType
+			(int) gm->m_playerGlow, gm->activeIconForType(gm->m_playerIconType), (int) gm->m_playerIconType
 		);
 	}
 
@@ -52,7 +52,7 @@ namespace argonutils {
 				auto token = std::move(res).unwrap();
 
 				auto web = geode::utils::web::WebRequest();
-				web.bodyString(basePostString());
+				web.bodyString(basePostString(token));
 
 				argonutils::seshListener.bind([callback](geode::utils::web::WebTask::Event* e) {
 					if (auto* res = e->getValue()) {

@@ -116,7 +116,7 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 							fmt::format(
 								"{} <cy>{}</c>", 
 								argonutils::getPreErrorString(json[1].asUInt().unwrapOr(0), json[0]), 
-								json[0].asString().unwrapOr(res->string())
+								json[0].asString().unwrapOr(res->string().unwrapOr(""))
 							).c_str(), 
 							"OK", nullptr, nullptr
 						)->show();
