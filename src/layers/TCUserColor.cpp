@@ -102,13 +102,7 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 
 		if (success) {
 			auto web = geode::utils::web::WebRequest();
-			web.bodyString(
-				fmt::format(
-					"userName={}&userID={}&accountID={}&auth={}&r={}&g={}&b={}",
-					gam->m_username, gm->m_playerUserID, gam->m_accountID,
-					token, rgb.r, rgb.g, rgb.b
-				)
-			);
+			web.bodyString(fmt::format("{}&r={}&g={}&b={}", argonutils::basePostString(), rgb.r, rgb.g, rgb.b));
 
 			m_colorListener.bind([this](geode::utils::web::WebTask::Event* e) {
 				if (auto* res = e->getValue()) {
@@ -117,7 +111,15 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 					} 
 					else {
 						auto json = res->json().unwrapOr(matjson::Value::array());
-						FLAlertLayer::create("Failed To Set Color", fmt::format("{} <cy>{}</c>", argonutils::getPreErrorString(json[1].asUInt().unwrapOr(0), json[0]), json[0].asString().unwrapOr("Servers may be down. Please wait until they are back up.")).c_str(), "OK")->show();
+						geode::MDPopup::create(
+							"Failed To Set Color", 
+							fmt::format(
+								"{} <cy>{}</c>", 
+								argonutils::getPreErrorString(json[1].asUInt().unwrapOr(0), json[0]), 
+								json[0].asString().unwrapOr(res->string())
+							).c_str(), 
+							"OK", nullptr, nullptr
+						)->show();
 					}
 					
 					m_loading->setVisible(false);

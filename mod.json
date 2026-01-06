@@ -8,7 +8,7 @@
 	},
 	"id": "reallynewb.team-create",
 	"name": "Team Create",
-	"version": "v1.0.0-alpha",
+	"version": "v1.0.0-alpha.0",
 	"developer": "ReallyNewb",
 	"description": "Level collaboration in-game!",
 	"tags": ["editor", "online", "enhancement"],

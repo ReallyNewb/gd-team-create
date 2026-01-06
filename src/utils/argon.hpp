@@ -11,9 +11,9 @@ namespace argonutils {
 	std::string getPreErrorString(unsigned int errorCode, const matjson::Value& err) {
 		switch (errorCode) {
 		case 2:
-			return "An error occurred with verification due to some error on Argon's end. Error:";
+			return "An <cr>error occurred</c> with <cf>verification</c> due to some error on <cl>Argon's end.</c> Error:";
 		case 3:
-			return "Please stop trying to send requests with <cl>bogus data.</c>";
+			return "Please <cr>stop</c> trying to <cb>send requests</c> with <cl>bogus data.</c>";
 		case 4: {
 			geode::Mod::get()->setSavedValue<std::string>("argon-token", "");
 			return "Please <cg>refresh login</c> in <cr>account settings.</c>";
@@ -25,6 +25,18 @@ namespace argonutils {
 		default: 
 			return "Unknown error. Error:";
 		}
+	}
+
+	std::string basePostString() {
+		auto gam = GJAccountManager::get();
+		auto gm = GameManager::get();
+
+		return fmt::format(
+			"userName={}&userID={}&accountID={}&argon={}&pcolor={}&scolor={}&gcolor={}&genabled={}&icon={}&iconType={}",
+			gam->m_username, gm->m_playerUserID, gam->m_accountID, token,
+			gm->m_playerColor, gm->m_playerColor2, gm->m_playerGlowColor,
+			(int) gm->m_playerGlow, gm->activeIconForType(player->m_playerIconType), (int) player->m_playerIconType
+		);
 	}
 
 	void startAuth(const std::function<void(const std::string&, bool)>& callback) {
@@ -39,14 +51,8 @@ namespace argonutils {
 			if (res.isOk()) {
 				auto token = std::move(res).unwrap();
 
-				auto gam = GJAccountManager::get();
 				auto web = geode::utils::web::WebRequest();
-				web.bodyString(
-					fmt::format(
-						"userName={}&userID={}&accountID={}&argon={}",
-						gam->m_username, GameManager::get()->m_playerUserID, gam->m_accountID, token
-					)
-				);
+				web.bodyString(basePostString());
 
 				argonutils::seshListener.bind([callback](geode::utils::web::WebTask::Event* e) {
 					if (auto* res = e->getValue()) {
