@@ -96,8 +96,6 @@ bool TCUserColor::setup() {
 
 void TCUserColor::onSubmit(cocos2d::CCObject*) {
 	argonutils::showAuthConsentPopup([=, this](const std::string& token, bool success) {
-		m_loading->setVisible(true);
-		m_submit->setVisible(false);
 		auto rgb = m_colorPicker->getColorValue();
 
 		if (success) {
@@ -135,7 +133,7 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 		}
 
 		mod->setSavedValue<cocos2d::ccColor3B>("user-color", rgb);
-	});
+	}, m_loading, m_submit);
 }
 
 void TCUserColor::onPlayerColor(cocos2d::CCObject* sender) {

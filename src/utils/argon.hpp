@@ -78,7 +78,7 @@ namespace argonutils {
 		};
 	}
 
-	void showAuthConsentPopup(const std::function<void(const std::string&, bool)>& callback) {
+	void showAuthConsentPopup(const std::function<void(const std::string&, bool)>& callback, cocos2d::CCNode* show, cocos2d::CCNode* hide) {
 		auto eToken = geode::Mod::get()->getSavedValue<std::string>("argon-token");
 		if (!eToken.empty()) {
 			callback(eToken, true);
@@ -111,7 +111,13 @@ namespace argonutils {
 			"By training <cl>Zstd dictionaries,</c> compressing can be made <cj>**MUCH faster.**</c>",
 
 			"OK", "Authenticate",
-			[callback](bool confirm) { if (confirm) startAuth(callback); }
+			[callback](bool confirm) { 
+				if (confirm) {
+					show->setVisible(true);
+					hide->setVisible(false);
+					startAuth(callback); 
+				}
+			}
 		)->show();
 	}
 }
