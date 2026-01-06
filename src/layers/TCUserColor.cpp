@@ -102,7 +102,7 @@ void TCUserColor::onSubmit(cocos2d::CCObject*) {
 
 		if (success) {
 			auto web = geode::utils::web::WebRequest();
-			web.bodyString(fmt::format("{}&r={}&g={}&b={}", argonutils::basePostString(), rgb.r, rgb.g, rgb.b));
+			web.bodyString(fmt::format("{}&r={}&g={}&b={}", argonutils::basePostString(token), rgb.r, rgb.g, rgb.b));
 
 			m_colorListener.bind([this](geode::utils::web::WebTask::Event* e) {
 				if (auto* res = e->getValue()) {
