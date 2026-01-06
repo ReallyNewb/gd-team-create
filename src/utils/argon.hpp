@@ -12,8 +12,10 @@ namespace argonutils {
 		switch (errorCode) {
 		case 2:
 			return "An <cr>error occurred</c> with <cf>verification</c> due to some error on <cl>Argon's end.</c> Error:";
-		case 3:
-			return "Please <cr>stop</c> trying to <cb>send requests</c> with <cl>bogus data.</c>";
+		case 3: {
+			geode::Mod::get()->setSavedValue<std::string>("argon-token", "");
+			return "Please <cr>stop</c> trying to <cb>send requests</c> with <cl>bogus data.</c> If this <cb>error appeared casually,</c> worry not, we have <cj>reset</c> your <cf>authentication token</c> <cr>**locally**</c> to <cg>attempt to prevent</c> any <ca>future issues similar to this.</c>\n\nMessage: ";
+		}
 		case 4: {
 			geode::Mod::get()->setSavedValue<std::string>("argon-token", "");
 			return "Please <cg>refresh login</c> in <cr>account settings.</c>";
@@ -90,27 +92,53 @@ namespace argonutils {
 		geode::MDPopup::create(
 			"Authenticate With Argon",
 
-			"# Argon\n"
-			"Argon is an <cl>authentication method</c> created by the developers of <ca>Globed</c> and is trusted by the developer, <cy>RobTop.</c>\n\n"
+			"# About Argon\n"
+			"Argon is an <cl>authentication method</c> created by the developers of <ca>Globed</c> and is <cg>trusted by the developer of Geometry Dash,</c> <cy>RobTop.</c>\n\n"
 
 			"Argon sends a <cg>message</c> to a bot account for verification. Argon <cr>**does and will NOT**</c>"
 			" send your <cy>GD password</c> to a server for verification.\n\n"
 
-			"You may read the privacy policy for specifics as to how your data is utilized.\n\n"
+			"You may <cg>read</c> the <cr>**privacy policy**</c> for <ca>specifics</c> as to how <cj>your data is utilized.</c>\n\n"
 
 			"# Privacy Policy\n"
+
+			"## Data We Collect\n"
 
 			"The data we collect are your <cl>username, accountID, userID, Argon token, icon colors, primary icon type and index, and user color.</c>\n"
 			"The first 4 pieces of data are <cp>merely for Argon verification.</c> The rest are <ca>merely cosmetic</c> and <cr>won't share anything personal about your account.</c>\n\n"
 
 			"To make support for the <cr>Friends Only</c> invite mode, we send your <cl>friends list</c> to the server.</c>\n\n"
 
-			"The data we collect <cr>is NOT</c> shared with any <cb>third party services.</c> <cj>Level data</c> from our server are at times used for training a <cl>Zstd dictionary.</c> "
+			"## Data Usage\n"
+
+			"<cj>Level data</c> from our server are at times used for training a <cl>Zstd dictionary.</c> "
 			"Note that <cl>Zstd dictionaries</c> are <co>entirely local</c> and don't rely on any external services.\n\n"
 
 			"<cl>Zstd dictionaries</c> are merely for <cp>compressing</c> level data in <cy>**HUGE amounts**</c> "
 			"to comply with <cf>disk space limits</c> from the host of the mod's server, [Spaceify.](https://spaceify.eu)\n\n"
-			"By training <cl>Zstd dictionaries,</c> compressing can be made <cj>**MUCH faster.**</c>",
+			"By training <cl>Zstd dictionaries,</c> compressing can be made <cj>**MUCH faster.**</c>\n\n"
+
+			"### Data We (Never Will) Share\n"
+
+			"The data we collect <cr>is NOT</c> shared with any <cb>third party services.</c> The data is only kept in <cl>Team Create's database</c> and is <cr>**not distributed**</c> to <cb>other databases or random people.</c>"
+
+			"## Data Security\n"
+
+			"We try to <cy>protect your data</c> by using some basic <cr>security methods</c> like <cl>verifying the data sent by the client</c> and <cj>parameterized queries</c> in <cb>SQL commands.</c>\n"
+			"However, there may be <cr>security bugs</c> unnoticed, or <cp>I implemented a security method **really poorly.**</c>\n"
+			"### <cy>If you ever find a security bug, PLEASE and DO send it to me (ReallyNewb) privately via the Geometry Dash messaging system.</c></c>",
+
+			"## User Rights\n"
+
+			"<cg>Users</c> may <cr>manage their data</c> at anytime using the [mod's settings.](mod:reallynewb.team-create) If you have <co>any suggestion</c> for <cl>data management,</c>"
+			"definitely <cy>post it</c> in the <cl>mod's comments.</c>"
+
+			"## Data Retention\n"
+
+			"<cg>A user's data</c> is <cr>retained</c> as long as they <co>delete their account</c> via the [mod's settings.](mod:reallynewb.team-create) <cf>Deleting your account</c> will take up to <cy>14 days</c>"
+			" <cb>just in case</c> you <cl>might've tapped too many buttons.</c>\n\nAs always, <cr>account deletion</c> is <ca>**ALWAYS revertable.**</c>"
+
+			"## You may now <cf>go ahead</c> and <cj>start the authentication process.</c> If you <cr>don't feel like doing so right now,</c> <cy>consider authenticating later by pressing \"OK\".</c>",
 
 			"OK", "Authenticate",
 			[callback, show, hide](bool confirm) { 
