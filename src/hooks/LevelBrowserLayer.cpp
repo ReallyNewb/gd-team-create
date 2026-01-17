@@ -54,14 +54,14 @@ class $modify(TCBrowserLayer, LevelBrowserLayer) {
 	}
 
 	void onSharedLevels(cocos2d::CCObject*) {
-		auto inShared = m_fields->m_inSharedLevels;
+		m_fields->m_inSharedLevels = !m_fields->m_inSharedLevels;
 
-		auto sprFrame = cocos2d::CCSpriteFrameCache::get()->spriteFrameByName(inShared ? "geode.loader/baseCircle_SmallAlt_DarkPurple.png" : "geode.loader/baseCircle_SmallAlt_Green.png");
+		auto sprFrame = cocos2d::CCSpriteFrameCache::get()->spriteFrameByName(m_fields->m_inSharedLevels ? "geode.loader/baseCircle_SmallAlt_DarkPurple.png" : "geode.loader/baseCircle_SmallAlt_Green.png");
 		m_fields->m_sharedSprite->setDisplayFrame(sprFrame);
 
-		static_cast<cocos2d::CCLabelBMFont*>(m_list->getChildByID("title"))->setString(inShared ? "Shared With Me" : "My Levels");
+		static_cast<cocos2d::CCLabelBMFont*>(m_list->getChildByID("title"))->setString(m_fields->m_inSharedLevels ? "Shared With Me" : "My Levels");
 
-		if (inShared) {
+		if (m_fields->m_inSharedLevels) {
 			auto testArray = cocos2d::CCArray::create();
 			auto level = GJGameLevel::create();
 			level->m_levelName = "Shared Testing";
