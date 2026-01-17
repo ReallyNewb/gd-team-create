@@ -31,7 +31,7 @@ class $modify(TCBrowserLayer, LevelBrowserLayer) {
 
 			m_fields->m_sharedSprite = geode::CircleButtonSprite::create(
 				cocos2d::CCSprite::createWithSpriteFrameName("GJ_sFriendsIcon_001.png"),
-				geode::CircleBaseColor::Green, geode::CircleBaseSize::Medium
+				geode::CircleBaseColor::Green, geode::CircleBaseSize::SmallAlt
 			);
 			auto sharedBtn = CCMenuItemSpriteExtra::create(
 				m_fields->m_sharedSprite, this, menu_selector(TCBrowserLayer::onSharedLevels)
@@ -56,10 +56,7 @@ class $modify(TCBrowserLayer, LevelBrowserLayer) {
 	void onSharedLevels(cocos2d::CCObject*) {
 		auto inShared = m_fields->m_inSharedLevels;
 
-		auto sprFrame = cocos2d::CCSpriteFrame::create(
-			inShared ? "geode.loader/baseCircle_Medium_DarkPurple.png" : "geode.loader/baseCircle_Medium_Green.png",
-			m_fields->m_sharedSprite->m_obRect
-		);
+		auto sprFrame = cocos2d::CCSpriteFrameCache::get()->spriteFrameByName(inShared ? "geode.loader/baseCircle_SmallAlt_DarkPurple.png" : "geode.loader/baseCircle_SmallAlt_Green.png");
 		m_fields->m_sharedSprite->setDisplayFrame(sprFrame);
 
 		static_cast<cocos2d::CCLabelBMFont*>(m_list->getChildByID("title"))->setString(inShared ? "Shared With Me" : "My Levels");
