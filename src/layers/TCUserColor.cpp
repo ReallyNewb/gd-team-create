@@ -163,8 +163,8 @@ void TCUserColor::colorValueChanged(cocos2d::ccColor3B color) {
 }
 
 void TCUserColor::textChanged(CCTextInputNode* inputNode) {
-	auto value = m_colorPicker->m_rgb;
-	const GLubyte val = static_cast<GLubyte>(std::min(255, atoi(inputNode->getString().c_str())));
+	auto value = m_colorPicker->getColorValue();
+	auto val = static_cast<GLubyte>(std::min(255, atoi(inputNode->getString().c_str())));
 
 	switch (inputNode->m_nTag) {
 	case 0: 

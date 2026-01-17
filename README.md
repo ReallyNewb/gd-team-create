@@ -4,7 +4,7 @@ Are you sometimes <cr>tired</c> of the <ca>inefficient method of collaboration,<
 
 Well, I've got the <cj>solution</c> for you! Uhh... <ca>*Team Create!*</c> A mod that allows for <cy>collaboration with other players!</c> Simply <cr>invite your creator friends</c> to a level, set their <cp>permissions,</c> and have a great time editing together!
 
-# <cl>Notes:</c>
+# <cl>Notes</c>
 
 - <cr>**If you are looking for a much more stable collaboration experience, consider buying the mod [Editor Collab](mod:alk.editor-collab) by alk. While I cannot state any pros and cons between Editor Collab and my mod since I don't have Editor Collab, definitely do compare this mod and Editor Collab to see any (probably noticeable) differences between the two.**</c>
 

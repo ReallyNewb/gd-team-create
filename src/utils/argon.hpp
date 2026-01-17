@@ -13,11 +13,11 @@ namespace argonutils {
 		case 2:
 			return "An <cr>error occurred</c> with <cf>verification</c> due to some error on <cl>Argon's end.</c> Error:";
 		case 3: {
-			geode::Mod::get()->setSavedValue<std::string>("argon-token", "");
+			geode::Mod::get()->setSavedValue<std::string>("authentication", "");
 			return "Please <cr>stop</c> trying to <cb>send requests</c> with <cl>bogus data.</c> If this <cb>error appeared casually,</c> worry not, we have <cj>reset</c> your <cf>authentication token</c> <cr>**locally**</c> to <cg>attempt to prevent</c> any <ca>future issues similar to this.</c>\n\nMessage: ";
 		}
 		case 4: {
-			geode::Mod::get()->setSavedValue<std::string>("argon-token", "");
+			geode::Mod::get()->setSavedValue<std::string>("authentication", "");
 			return "Please <cg>refresh login</c> in <cr>account settings.</c>";
 		}
 		case 5: {
@@ -42,7 +42,7 @@ namespace argonutils {
 	}
 
 	void startAuth(const std::function<void(const std::string&, bool)>& callback) {
-		auto eToken = geode::Mod::get()->getSavedValue<std::string>("argon-token");
+		auto eToken = geode::Mod::get()->getSavedValue<std::string>("authentication");
 		if (!eToken.empty()) {
 			callback(eToken, true);
 			return;
@@ -60,7 +60,7 @@ namespace argonutils {
 					if (auto* res = e->getValue()) {
 						if (res->ok()) {
 							auto auth = res->json().unwrap()[0].asString().unwrap();
-							geode::Mod::get()->setSavedValue<std::string>("argon-token", auth);
+							geode::Mod::get()->setSavedValue<std::string>("authentication", auth);
 
 							callback(auth, true);
 							return;
@@ -81,7 +81,7 @@ namespace argonutils {
 	}
 
 	void showAuthConsentPopup(const std::function<void(const std::string&, bool)>& callback, cocos2d::CCNode* show, cocos2d::CCNode* hide) {
-		auto eToken = geode::Mod::get()->getSavedValue<std::string>("argon-token");
+		auto eToken = geode::Mod::get()->getSavedValue<std::string>("authentication");
 		if (!eToken.empty()) {
 			show->setVisible(true);
 			hide->setVisible(false);
