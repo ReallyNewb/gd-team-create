@@ -57,12 +57,12 @@ class $modify(TCBrowserLayer, LevelBrowserLayer) {
 		auto inShared = m_fields->m_inSharedLevels;
 
 		auto sprFrame = cocos2d::CCSpriteFrame::create(
-			inShared ? "geode.loader/baseCircle_Medium_DarkPurple.png" : "geode.loader/baseCircle_Medium_Green.png"
+			inShared ? "geode.loader/baseCircle_Medium_DarkPurple.png" : "geode.loader/baseCircle_Medium_Green.png",
 			m_fields->m_sharedSprite->m_obRect
 		);
 		m_fields->m_sharedSprite->setDisplayFrame(sprFrame);
 
-		m_list->getChildByID("title")->setString(inShared ? "Shared With Me" : "My Levels");
+		static_cast<cocos2d::CCLabelBMFont*>(m_list->getChildByID("title"))->setString(inShared ? "Shared With Me" : "My Levels");
 
 		if (inShared) {
 			auto testArray = cocos2d::CCArray::create();
